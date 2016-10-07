@@ -1,0 +1,21 @@
+##Aim: Structured programming
+
+
+#Struct
+
+  A collection of values in a single data type
+  
+  ```c 
+  struct{int a; char x;} s; 
+  ```
+  
+    Here, s is a variable of type struct {int a; char x;}
+
+  
+  
+  ##Code
+  '''c
+  struct {int a; char x;} s;
+  printf("size of s: %lu\n", sizeof(s));
+  
+  '''
