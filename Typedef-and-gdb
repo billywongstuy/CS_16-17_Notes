@@ -1,0 +1,28 @@
+Aim: Get Dem Bugs!
+
+Typedef
+  Provide a new name for an existing data type.
+  
+  typedef <real type> <new name>;
+  
+  ex:
+    typedef unsigned long size_t;
+    size_t x = 139; //x is really an unsigned long
+    
+    type struct foo {int a; char x;} bar;
+    Here, bar is a typedef for struct {int a; char x;}
+    
+    bar s;
+    
+gdb (GNU debugger)
+  Allows you to get detailed information about a program while it is running.
+  
+  in terminal: 
+  gdb <filename>
+  run
+  
+      
+    
+    /*
+    mashable hashable slashable bashable crashable flashable clashable rashable lashable dashable washable
+    */
