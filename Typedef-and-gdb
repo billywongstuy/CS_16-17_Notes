@@ -13,16 +13,58 @@ Typedef
     Here, bar is a typedef for struct {int a; char x;}
     
     bar s;
-    
+
+---------------------------------------------------------------------------------------
+
 gdb (GNU debugger)
   Allows you to get detailed information about a program while it is running.
   
-  in terminal: 
-  gdb <filename>
-  run
   
-      
+  gcc -g <filename>
+  
+  in terminal: 
+  gdb <filename>    such as a.out
+  (gdb)run : to run the file in gdb
+  
+  
+  (gdb)list : to show lines and code around error
+  
+  (gdb)backtrace : shows stack at time of error
+  
+  (gdb)break <#> : to run code until line <#>
+  use (gdb)continue to continue
     
-    /*
-    mashable hashable slashable bashable crashable flashable clashable rashable lashable dashable washable
-    */
+  You can also print out variable values with    (gdb)print <variable name>
+  
+  
+  (gdb)quit to stop it
+  
+-------------------------------------------------------------------------------------------
+
+valgrind
+  -Monitords amount of memory used by an operation
+  -valgrind ./a.out
+  
+-------------------------------------------------------------
+
+in makefile variables
+
+GCC = gcc -g
+
+all: list .o main.o
+  $(GCC) list.o main.o -o ltest
+
+list.o: list.c list.h
+  $(GCC) -c list.c
+  
+main.o: main.c list.h
+  $(GCC) -c main.c
+  
+  
+
+  
+  
+  
+
+
+Goodbye to -ashables!
