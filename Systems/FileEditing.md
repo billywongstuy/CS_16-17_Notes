@@ -52,7 +52,7 @@
   #include <fcntl.h>
 
   int fd;
-  fd = open("tester",0_RDONLY);
+  fd = open("tester",O_RDONLY);
   printf("fd: %d\n", fd);
   printf("error: %d - %s\n",errno,strerror(errno));
   
