@@ -1,6 +1,5 @@
 #Aim: Opening up a world of possiblities
 
-
 ##open - \<fcntl.h\>
 
   Add a file to the file table and returns its file descriptor
@@ -46,7 +45,10 @@
   
   Returns 0 if successful. Returns -1 and sets errno if unsuccessful.
 
-##umask - <sys/stat.h>
+
+#Aim: Read Your Writes!
+
+##umask - \<sys/stat.h\>
   Set the fuke creation permission mask
 
   By default, created files are not given the exact permissions provided in the mode argument to open. 
@@ -89,13 +91,11 @@
 
   write(<FILEDESCRIPTOR>, <BUFFER>, <AMOUNT>)
   
-  write(...
+  write(fd, buff, n) //Writes n bytes from buff into fd's file
   
-  Writes n bytes from buff into fd's file
+  Returns the number of bytes actually written. Returns -1 and sets errno if unsuccessful.
   
-  Returns the number of bytes actyally written. Returns...
-  
-  BUFFER...
+  BUFFER must be a pointer.
   
 ```c
   #include <stdio.h>
@@ -110,19 +110,3 @@
   
   close(fd);
 ```
-
-
-
-
-read (int fileDescriptor, void * buff, int bytecount)
-
-Copies up to bytecounts bytes from fileDescriptor into buffer starting from buff
-
-returns amount of bytes read
-
-
-write (int fileDescriptor, const void *buff, int bytecount)
-
-writes up to bytecounts bytes from buff to fileDescriptor
-
-returns amount of bytes written
