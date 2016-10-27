@@ -77,7 +77,7 @@
 
   Read in data from a file
   
-  read(<FILEDESCRIPTOR>, <BUFFER>, <AMOUNT>)
+  read(\<FILEDESCRIPTOR\>, \<BUFFER\>, \<AMOUNT\>)
   
   read(fd, buff, n) //Read n bytes from the fd's file and put that data into buff
   
@@ -89,7 +89,7 @@
 
   write data to a file
 
-  write(<FILEDESCRIPTOR>, <BUFFER>, <AMOUNT>)
+  write(\<FILEDESCRIPTOR\>, \<BUFFER\>, \<AMOUNT\>)
   
   write(fd, buff, n) //Writes n bytes from buff into fd's file
   
@@ -97,6 +97,8 @@
   
   BUFFER must be a pointer.
   
+  
+#CODE
 ```c
   #include <stdio.h>
   #include <stdlib.h>
