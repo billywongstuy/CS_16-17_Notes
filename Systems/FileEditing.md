@@ -97,7 +97,31 @@
   
   BUFFER must be a pointer.
   
+
+#Aim: Edit and ye shall find!
+
+##lseek - \<unstd.h\>
+
+  Set the current position in an open file
   
+  lseek(\<FILEDESCRIPTOR\>, \<OFFSET\>, \<WHENCE\>)  
+  
+    offset: Number of bytes to move the position by (can be negative but never to SEEK_SET)
+  
+    whence: Where to measure the offset from
+  
+      SEEK_SET: offset is evaluated from the beginning of the file
+      
+      SEEK_CURL: offset is evaluated from the beginning of the file
+    
+      SEEK_END: offset is evaluated from the end of the file
+
+  Returns the number of bytes the current position is from the beginning of the file, or -1 (errno)
+  
+  
+
+  
+
 #CODE
 ```c
   #include <stdio.h>
