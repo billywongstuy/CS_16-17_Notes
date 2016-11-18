@@ -21,7 +21,7 @@
   
   ```c
   int i; float f; char s[10];
-  fgets(s,sizeof(s));
+  fgets(s,sizeof(s),stdin);
   printf("+%s+\n", s);
   
   
