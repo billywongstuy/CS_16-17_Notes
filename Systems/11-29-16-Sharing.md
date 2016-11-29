@@ -55,9 +55,41 @@
       
       
     
-    
-
 ```c
-int sd;
-sd = shmget(24601, 1024, IPC_CREAT | 0664)
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/shm.h>
+#include <sys/ipc.h>
+#include <sys/types.h>
+
+
+int main() {
+  int pid;
+  int sd;
+  int *a;
+  int status;
+
+  sd = shmget(24601, sizeof(int), IPC_CREAT | 0644);
+  
+  
+  pid = fork();
+  if (pid == 0) {
+    
+    a = shmat(sd, 0, 0);
+    *a = 37892;
+    printf("child: %p\n",a);
+    printf("child: %d\n",*a);
+    
+  }
+  else {
+    wait(&status);
+
+    a = shmat(sd, 0, 0);
+    printf("parent: %p\n",a);
+    printf("parent: %d\n",*a);
+    
+  }
+  
+}
+
 ```
