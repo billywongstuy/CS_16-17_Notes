@@ -54,7 +54,7 @@
       flags: usually 0, there is one useful flag (SHM_RDONLY: makes the memory read only)
       
       
-    
+##Code    
 ```c
 #include <stdio.h>
 #include <stdlib.h>
