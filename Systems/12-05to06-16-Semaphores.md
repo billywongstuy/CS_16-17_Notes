@@ -2,9 +2,9 @@
 
   Semaphores (created by Edsger Dijkstra)
 
-    IPC construct used to control access to a shared resource (like a file or shared memory).
+  IPC construct used to control access to a shared resource (like a file or shared memory).
     
-    Essentially, a semaphore is a counter that represents how many processes cana resource at any given time.
+  Essentially, a semaphore is a counter that represents how many processes cana resource at any given time.
   
       If a semaphore has a value of 3, then it can have 3 active users.    
     
@@ -94,6 +94,15 @@ int main (int argc, int *argv[]) {
   union semun su;
   su.val = 1;
   sc = semctl(semid,0,SETVAL,su);
+  
+  
+  printf("value set: %d\n",sc);
+  
+  sc = semctl(semid,0,GETVAL);
+  printf("semaphore value: %d\n", sc);
+  
+  sc = semctl(semid, 0, IPC_RMID);
+  printf("semaphore removed: %d\n",sc);
 }
 
 
