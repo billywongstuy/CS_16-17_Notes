@@ -71,11 +71,50 @@
     
       INDEX: index of semaphore you want to control in DESCRIPTOR (for single semaphore set 0)
       
-      OPERATION: One of the following (IPC_RMID: remove semaphore, SETVAL: set value [requires DATA], SETALL: set value for every semaphore in set, GETVAL: return value, IPC_STAT: populate buffer with information about the semaphore)
+      OPERATION: One of the following
       
-      DATA: 
+        a. IPC_RMID: remove semaphore
+        
+        b. SETVAL: set value [requires DATA]
+          
+        c. SETALL: set value for every semaphore in set
+        
+        d. GETVAL: return value
+        
+        e. IPC_STAT: populate buffer with information about the semaphore [requires DATA]
+      
+      DATA: your information (union semun) (which must be declared)
+      
+      
+  semop: Perform semaphore operations (like Up/Down) 
+    
+    All operations performed via semop are atomic
+      
+    semop (DESCRIPTOR, OPERATION, AMOUNT)
+      
+      DESCRIPTOR
+
+      OPERATION: A pointer to a struct sembuf value
+        
+        struct sembuf {
+          short sem_op;
+          short sem_num;
+          short sem_flag;
+        };
+          
+          sem_num: The index of the semaphore you want to work on.
+          
+          sem_op: -1 = Down(S) ; 1 = Up(S) ;   ANY +/- NUMBER WILL WORK ; 0 = Block until semaphore reaches 0
+          
+          sem_flag: Provide further options
+            SEM_UNDO: Allow OS to undo given operation
+            IPC_NOWAIT: Instead of waiting for semaphore to be available, return an error.
+          
+        
+      AMOUNT: the amount of semaphores you want to operate on in a semaphore set.
 
 #Code
+
 ```c
 union semun {
 
