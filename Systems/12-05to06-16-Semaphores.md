@@ -14,19 +14,19 @@
     
     Semaphore operations:
     
-    Create a semaphore
+      Create a semaphore
     
-    Set up initial value
+      Set up initial value
   
-    up(s)/v(s)
-      Release the semaphore to signal you are done with its associated 
+      up(s)/v(s)
+        Release the semaphore to signal you are done with its associated 
   
-    down / p(s)
-      attempt to take the semaphore 
+      down / p(s)
+        attempt to take the semaphore 
   
-      if the semaphore is 0, wait for it to be available.   
+        if the semaphore is 0, wait for it to be available.   
   
-    remove a semaphore 
+      remove a semaphore 
   
   
   Semaphores in C - sys/types.h, sys/ipc.h, sys/sem.h
@@ -78,7 +78,25 @@
 
 #Code
 ```c
-int semid;
+union semun {
+
+}
+
+
+int main (int argc, int *argv[]) {
+  int semid;
+  int key = ftok("makefile",22);
+  int sc;
+
+  semid = semget(key,1,IPC_CREAT | 0644);
+  printf("semaphore created: %d\n", semid);
+
+  union semun su;
+  su.val = 1;
+  sc = semctl(semid,0,SETVAL,su);
+}
+
+
 ```
   
   
