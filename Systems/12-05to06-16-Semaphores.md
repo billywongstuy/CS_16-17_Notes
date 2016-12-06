@@ -6,27 +6,27 @@
     
   Essentially, a semaphore is a counter that represents how many processes cana resource at any given time.
   
-      If a semaphore has a value of 3, then it can have 3 active users.    
-    
-      If a semaphore has a value of 0, then it is unavailable.
+    If a semaphore has a value of 3, then it can have 3 active users.    
     
-    Most semaphore operations are "atomic" meaning that they will not be split up into multiple processor instructions.
+    If a semaphore has a value of 0, then it is unavailable.
     
-    Semaphore operations:
-    
-      Create a semaphore
-    
-      Set up initial value
-  
-      up(s)/v(s)
-        Release the semaphore to signal you are done with its associated 
-  
-      down / p(s)
-        attempt to take the semaphore 
+  Most semaphore operations are "atomic" meaning that they will not be split up into multiple processor instructions.
+    
+  Semaphore operations:
   
-        if the semaphore is 0, wait for it to be available.   
-  
-      remove a semaphore 
+    Create a semaphore
+    
+    Set up initial value
+    
+    up(s)/v(s)
+      Release the semaphore to signal you are done with its associated 
+    
+    down / p(s)
+      attempt to take the semaphore 
+      
+      if the semaphore is 0, wait for it to be available.   
+    
+    remove a semaphore 
   
   
   Semaphores in C - sys/types.h, sys/ipc.h, sys/sem.h
@@ -35,17 +35,16 @@
       
       create/get access to a semaphore 
     
-      returns smaphore descriptor or -1
-    
+      returns semaphore descriptor or -1
+      
       semget (key, amount,flags)
       
-        key (identifier - use ftok)
+        key (identifier - use ftok)
         
-        Amount (set of how many)
+        amount (set of how many)
         
-        flags (permissions)
-        
-          Bitwise or IPC_CREAT, IPC_EXCL
+        flags (permissions)
+          Bitwise or IPC_CREAT, IPC_EXCL
    
    
 #Aim: What\'s a semaphore? - To control resources
@@ -88,21 +87,26 @@ int main (int argc, int *argv[]) {
   int key = ftok("makefile",22);
   int sc;
 
-  semid = semget(key,1,IPC_CREAT | 0644);
-  printf("semaphore created: %d\n", semid);
-
-  union semun su;
-  su.val = 1;
-  sc = semctl(semid,0,SETVAL,su);
+  if (strcmp( argv[1], "-c", strlen(argv[1])) == 0) {
+    semid = semget(key,1,IPC_CREAT | 0644);
+    printf("semaphore created: %d\n", semid);
+    union semun su;
+    su.val = 1;
+    sc = semctl(semid,0,SETVAL,su);
+    printf("value set: %d\n",sc);
+  }
+ 
+  else if (strcmp( argv[1], "-v", strlen(argv[1])) == 0) {
+    semid = semget(key,1,0);
+    sc = semctl(semid,0,GETVAL);
+    printf("semaphore value: %d\n", sc);
+  }
   
-  
-  printf("value set: %d\n",sc);
-  
-  sc = semctl(semid,0,GETVAL);
-  printf("semaphore value: %d\n", sc);
-  
-  sc = semctl(semid, 0, IPC_RMID);
-  printf("semaphore removed: %d\n",sc);
+  else if (strcmp( argv[1], "-r", strlen(argv[1])) == 0) {
+    semid = semget(key,1,0);
+    sc = semctl(semid, 0, IPC_RMID);
+    printf("semaphore removed: %d\n",sc);
+  }
 }
 
 
