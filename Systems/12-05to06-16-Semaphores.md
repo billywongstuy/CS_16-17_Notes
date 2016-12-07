@@ -126,7 +126,7 @@ int main (int argc, int *argv[]) {
   int key = ftok("makefile",22);
   int sc;
 
-  if (strcmp( argv[1], "-c", strlen(argv[1])) == 0) {
+  if (strncmp( argv[1], "-c", strlen(argv[1])) == 0) {
     semid = semget(key,1,IPC_CREAT | 0644);
     printf("semaphore created: %d\n", semid);
     union semun su;
@@ -135,13 +135,13 @@ int main (int argc, int *argv[]) {
     printf("value set: %d\n",sc);
   }
  
-  else if (strcmp( argv[1], "-v", strlen(argv[1])) == 0) {
+  else if (strncmp( argv[1], "-v", strlen(argv[1])) == 0) {
     semid = semget(key,1,0);
     sc = semctl(semid,0,GETVAL);
     printf("semaphore value: %d\n", sc);
   }
   
-  else if (strcmp( argv[1], "-r", strlen(argv[1])) == 0) {
+  else if (strncmp( argv[1], "-r", strlen(argv[1])) == 0) {
     semid = semget(key,1,0);
     sc = semctl(semid, 0, IPC_RMID);
     printf("semaphore removed: %d\n",sc);
