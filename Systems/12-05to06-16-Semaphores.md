@@ -1,117 +1,119 @@
 #Aim: How do we flag down a resource?
 
-  Semaphores (created by Edsger Dijkstra)
+  * Semaphores (created by Edsger Dijkstra)
 
-  IPC construct used to control access to a shared resource (like a file or shared memory).
+  * IPC construct used to control access to a shared resource (like a file or shared memory).
     
-  Essentially, a semaphore is a counter that represents how many processes cana resource at any given time.
+  * Essentially, a semaphore is a counter that represents how many processes cana resource at any given time.
   
-    If a semaphore has a value of 3, then it can have 3 active users.    
+    * If a semaphore has a value of 3, then it can have 3 active users.    
     
-    If a semaphore has a value of 0, then it is unavailable.
+    * If a semaphore has a value of 0, then it is unavailable.
     
-  Most semaphore operations are "atomic" meaning that they will not be split up into multiple processor instructions.
+  * Most semaphore operations are "atomic" meaning that they will not be split up into multiple processor instructions.
     
-  Semaphore operations:
+  * Semaphore operations:
   
-    Create a semaphore
+    * Create a semaphore
     
-    Set up initial value
+    * Set up initial value
     
-    up(s)/v(s)
-      Release the semaphore to signal you are done with its associated 
+    * up(s)/v(s)
+      * Release the semaphore to signal you are done with its associated 
     
-    down / p(s)
-      attempt to take the semaphore 
+    * down / p(s)
+      * attempt to take the semaphore 
       
-      if the semaphore is 0, wait for it to be available.   
+      * if the semaphore is 0, wait for it to be available.   
     
-    remove a semaphore 
+    * remove a semaphore 
   
   
-  Semaphores in C - sys/types.h, sys/ipc.h, sys/sem.h
+  * Semaphores in C - sys/types.h, sys/ipc.h, sys/sem.h
   
-    semget   
+    * semget   
       
-      create/get access to a semaphore 
+      * create/get access to a semaphore 
     
-      returns semaphore descriptor or -1
+      * returns semaphore descriptor or -1
       
-      semget (key, amount,flags)
+      * semget (key, amount,flags)
       
-        key (identifier - use ftok)
+        * key (identifier - use ftok)
         
-        amount (set of how many)
+        * amount (set of how many)
         
-        flags (permissions)
-          Bitwise or IPC_CREAT, IPC_EXCL
+        * flags (permissions)
+          * Bitwise or IPC_CREAT, IPC_EXCL
    
    
-#Aim: What\'s a semaphore? - To control resources
+* #Aim: What\'s a semaphore? - To control resources
 
-  Semaphore code
+  * Semaphore code
   
-  semctl - sys/types.h , ...
+  * semctl - sys/types.h , ...
 
-    Control the semaphore including:
+    * Control the semaphore including:
    
-      Set the semaphore value
+      * Set the semaphore value
 
-      Remove the semaphore
+      * Remove the semaphore
 
-      Get the current value
+      * Get the current value
  
-      Get information about the semaphore
+      * Get information about the semaphore
 
-    These operations are not atomic
+    * These operations are not atomic
 
-    semctl (DESCRIPTOR, INDEX, OPERATION, DATA)
+    * semctl (DESCRIPTOR, INDEX, OPERATION, DATA)
     
-      DESCRIPTOR: return value of semget
+      * DESCRIPTOR: return value of semget
     
-      INDEX: index of semaphore you want to control in DESCRIPTOR (for single semaphore set 0)
+      * INDEX: index of semaphore you want to control in DESCRIPTOR (for single semaphore set 0)
       
-      OPERATION: One of the following
+      * OPERATION: One of the following
       
-        a. IPC_RMID: remove semaphore
+        * a. IPC_RMID: remove semaphore
         
-        b. SETVAL: set value [requires DATA]
+        * b. SETVAL: set value [requires DATA]
           
-        c. SETALL: set value for every semaphore in set
+        * c. SETALL: set value for every semaphore in set
         
-        d. GETVAL: return value
+        * d. GETVAL: return value
         
-        e. IPC_STAT: populate buffer with information about the semaphore [requires DATA]
+        * e. IPC_STAT: populate buffer with information about the semaphore [requires DATA]
       
-      DATA: your information (union semun) (which must be declared)
+      * DATA: your information (union semun) (which must be declared)
       
       
-  semop: Perform semaphore operations (like Up/Down) 
+  * semop: Perform semaphore operations (like Up/Down) 
     
-    All operations performed via semop are atomic
+    * All operations performed via semop are atomic
       
-    semop (DESCRIPTOR, OPERATION, AMOUNT)
+    * semop (DESCRIPTOR, OPERATION, AMOUNT)
       
-      DESCRIPTOR
+      * DESCRIPTOR
 
-      OPERATION: A pointer to a struct sembuf value
+      * OPERATION: A pointer to a struct sembuf value
         
+        ```
         struct sembuf {
           short sem_op;
           short sem_num;
           short sem_flag;
         };
+        ```
           
-          sem_num: The index of the semaphore you want to work on.
+          * sem_num: The index of the semaphore you want to work on.
           
-          sem_op: -1 = Down(S) ; 1 = Up(S) ;   ANY +/- NUMBER WILL WORK ; 0 = Block until semaphore reaches 0
+          * sem_op: -1 = Down(S) ; 1 = Up(S) ;   ANY +/- NUMBER WILL WORK ; 0 = Block until semaphore reaches 0
           
-          sem_flag: Provide further options
-            SEM_UNDO: Allow OS to undo given operation
-            IPC_NOWAIT: Instead of waiting for semaphore to be available, return an error.
+          * sem_flag: Provide further options
+            * SEM_UNDO: Allow OS to undo given operation
+            * IPC_NOWAIT: Instead of waiting for semaphore to be available, return an error.
           
         
-      AMOUNT: the amount of semaphores you want to operate on in a semaphore set.
+      * AMOUNT: the amount of semaphores you want to operate on in a semaphore set.
 
 #Code
 
