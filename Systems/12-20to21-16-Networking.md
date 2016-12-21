@@ -1,3 +1,4 @@
+# 12/20/16
 #Aim: Cisco in a hour
 
 ##Required Components of Networking
@@ -38,4 +39,13 @@
     * In Thicknet and Thinnet, all data is sent to all computers.
       
     * Each computer added increases the power drain on the entire system, degrading service.
+    
+    
+# 12/21/16
+#Aim: Part II: Electric Boogaloo
+
+ <b>Physical Layer cont.</b>
+ 
+ * Token Ring
+  * Each computer is connected in a ring to each other.
         
