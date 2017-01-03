@@ -94,3 +94,17 @@
         * Maximum Transmission Unit
         
         * 1500 Bytes for ethernet
+
+# 1/3/17
+#Aim: Cisco in an hour IV: A New Hope
+
+  <b>Network Layer</b>
+  
+  * Transmission of data between two separate networks
+  
+  * Is not concerned with whether or not data was sent successfully (connectionless).
+  
+  * Major features of this layer are addressing, routing and packet forwarding.
+  
+  
+  
