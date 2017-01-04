@@ -108,9 +108,50 @@
   
   * IP (internet protocol) address
   
-    * IPv4: 4 byte address
-      * [0-255].[0-255].[0-255].[0-255]
+  * IPv4: 4 byte address
   
-    * Routing is made easier by having IP addresses distributed in blocks.
+    * [0-255].[0-255].[0-255].[0-255]
+  
+  * Routing is made easier by having IP addresses distributed in blocks.
+    
+    
+# 1/4/17
+#Aim: Cisco in an hour™ V for Vendetta
+
+  <b>Network Layer, cont.</b>
+  
+    * Data is broken into packets (IPv4)
+  
+      * \<header info\>\<packet length\>\<fragment info\>\<time-to-live\>\<protocol\>
+    
+      * 2B, 2B, 4B, 1B, 1B
+    
+      * \<header checksum\>\<source\>\<destination\>\<...\>\<data\>
+    
+      * 2B, 4B, 4B, 4B, 20-65,535B
+    
+        * header info: packet type (IPv4/6), header length...
+      
+        * fragment info: full payloads may be broken up, this will have a total # of fragments, which fragment...
+      
+        * time-to-live: maximum number of hops before the packet dies
+      
+        * protocol: TCP/UDP/...
+      
+        * ...: optional information depending on protocol, type etc.
+      
+    * IPv4 MTU (max transmission unit) is 65,535 B
+    
+  * IPv6
+    
+    * Biggest difference is the address space gors from 2^32 --> 2^128
+    
+    * Addresses are written as 8 groups of 4 hexadecimal digits (leading zeroes are ignored)
+    
+    * Jumbograms: Increases the MTU to ~4.3 billion (2^32)
+    
+    * Other improvements in IPv6 make the protocol incompatible with IPv4.
+    
+    
     
     
