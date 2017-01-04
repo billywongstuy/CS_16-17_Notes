@@ -1,5 +1,5 @@
 # 12/20/16
-#Aim: Cisco in a hour
+#Aim: Cisco in an hour™	
 
 ##Required Components of Networking
 * physical connection
@@ -42,7 +42,7 @@
     
     
 # 12/21/16
-#Aim: Part II: Electric Boogaloo
+#Aim: Cisco in an hour™ Part II: Electric Boogaloo
 
  <b>Physical Layer cont.</b>
  
@@ -69,7 +69,7 @@
    
    
 # 12/22/16
-#Aim: Cisco in an hour III: In 3-D!
+#Aim: Cisco in an hour™	III: In 3-D!
 
   <b>Data Link Layer</b>
   
@@ -96,7 +96,7 @@
         * 1500 Bytes for ethernet
 
 # 1/3/17
-#Aim: Cisco in an hour IV: A New Hope
+#Aim: Cisco in an hour™	IV: A New Hope
 
   <b>Network Layer</b>
   
@@ -106,5 +106,11 @@
   
   * Major features of this layer are addressing, routing and packet forwarding.
   
+  * IP (internet protocol) address
   
+    * IPv4: 4 byte address
+      * [0-255].[0-255].[0-255].[0-255]
   
+    * Routing is made easier by having IP addresses distributed in blocks.
+    
+    
