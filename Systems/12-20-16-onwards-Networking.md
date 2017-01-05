@@ -153,5 +153,49 @@
     * Other improvements in IPv6 make the protocol incompatible with IPv4.
     
     
+# 1/5/17
+#Aim: Cisco in an hour™ VI: The Undiscovered Country
+
+  <b>Transport Layer</b>
+  
+  * Computer to computer connection over a network
+  
+  * Unconcerned with the individual hops of layer 3 traffic (what do I with the info?)
+  
+  * Each destination address has multiple ports (65,535 ports)
+  
+    * Each port corresponds to a particular service
+    
+    * ports < 1024 are well known, reserved ports
+    
+    * Regulated by the Internet Assigned Numbers Authority (IANA)
+    
+  * TCP: Transmission Control Protocol
+  
+    * Reliable connection, guarantees delivery of data
+    
+    * Data is considered a continuous stream that arrives in the order it is sent (which may not be true in the network layer)
+    
+    * Connections are established using a 3-way handshake
+    
+      * Server "binds" to a port and waits
+      
+      1. Client sends a SYN message to the server
+      2. Server sends the client a SYN_ACK mesage
+      3. Client sends an ACK to the server
+      
+  * UDP: User Diagram Protocol
+  
+    * Does not require an explicit connection
+    
+    * Data is sent as discrete diagrams with a set size (as opposed to a continuous stream)
+    
+    * Datagrams may be droped or received out of order.
+    
+    * Assumes that any kind of error checking is handled at later level.
+    
+    
+    
+    
     
     
