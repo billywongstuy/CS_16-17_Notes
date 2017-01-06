@@ -233,9 +233,30 @@
       
       * socket ( domain , type , protocol )
       
-        * domain: type of address, IPv4, IPv6...     AF_INET: IPv4
+        * domain: type of address, IPv4, IPv6...   ---    AF_INET: IPv4
         
-        * type: tcp/udp            SOCK_STREAM: tcp, SOCK_DGRAM: udp
+        * type: tcp/udp    ---     SOCK_STREAM: tcp, SOCK_DGRAM: udp
         
-        * 
+        * protocol: cobination of domain and type settings
+          * If set to 0 the OS will set to correct protocol
+          
+        * example: int sd = socket(AF_INET, SOCK_STREAM,0);
+        
+    * bind \<sys/socket.h\>
+    
+      * Binds the socket to an address and port
+      
+      * Returns 0 (success) or -1 (failure)
+      
+      * bind ( socket descriptor , address , address length )
+      
+        * socket descriptor: return value of socket
+        
+        * address: pointer to a struct sockaddr_in
+        
+          * sin_family: adress domain (e.g. AF_INET)
+          
+          * sin_addr: IP address in binary --- INADDR_ANY: any incoming connection
+          
+            * inet_aton ( string , address variable ) - will convert a string representing an ip address to the correct format and place it in the second parameter
       
