@@ -180,9 +180,9 @@
     
       * Server "binds" to a port and waits
       
-      1. Client sends a SYN message to the server
-      2. Server sends the client a SYN_ACK mesage
-      3. Client sends an ACK to the server
+      * 1. Client sends a SYN message to the server
+      * 2. Server sends the client a SYN_ACK mesage
+      * 3. Client sends an ACK to the server
       
   * UDP: User Diagram Protocol
   
@@ -195,7 +195,47 @@
     * Assumes that any kind of error checking is handled at later level.
     
     
+# 1/6/17
+#Aim: Cisco in an hour™ VII: Adrian's Revenge
+
+  <b>Remaining Layers</b>
+  
+  * 5. Session
+  * 6. Presentation
+  * 7. Application
+  
+  * These layers are incorporated into the programs that use network connections.
+  
+  * Session layer represents end-to-end connections in a program (sockets).
+  
+  * Presentation layer represents how programs package transmitted data.
+  
+  * Application layer represents the programs that users interact with.
+  
+  
+  * Sockets (sys/socket.h, sys/types.h)
+  
+    * A socket is a network connection between two programs.
     
+    * A socket has 2 ends, each one consisting of an IP Adress/Port pair.
     
+    * To use a socket
+      * 1. create the socket
+      * 2. bind it to an address and ort
+      * 3. listen/initiate a connection
+      * 4. send/receive data
+      
+    * socket \<sys/socket.h\>
     
-    
+      * Creates a socket
+      
+      * Returns a socket descriptor (int that works like a file descrptor)
+      
+      * socket ( domain , type , protocol )
+      
+        * domain: type of address, IPv4, IPv6...     AF_INET: IPv4
+        
+        * type: tcp/udp            SOCK_STREAM: tcp, SOCK_DGRAM: udp
+        
+        * 
+      
