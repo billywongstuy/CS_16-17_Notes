@@ -221,9 +221,9 @@
     
     * To use a socket
       * 1. create the socket
-      * 2. bind it to an address and ort
-      * 3. listen/initiate a connection
-      * 4. send/receive data
+      * 2. bind it to ip port and listen
+      * 3. accept (server) /connect (client)
+      * 4. send/receive (transmit) data
       
     * socket \<sys/socket.h\>
     
@@ -252,11 +252,96 @@
       
         * socket descriptor: return value of socket
         
-        * address: pointer to a struct sockaddr_in
+        * address: pointer to a struct sockaddr_in(6)
         
           * sin_family: adress domain (e.g. AF_INET)
           
-          * sin_addr: IP address in binary --- INADDR_ANY: any incoming connection
+          * sin_addr: IP address in binary --- sin_addr.s_addr = INADDR_ANY //any incoming connection/local IP address
           
-            * inet_aton ( string , address variable ) - will convert a string representing an ip address to the correct format and place it in the second parameter
+            * inet_aton ( string , address variable ) - \<arpa/inet.h\>
+            
+              * will convert a string representing an ip address to the correct format and place it in the second parameter
+          
+          * sin_port 
+            
+            * htons(int)
+            
+              * Returns the port in the correct order    ---- big endian: most significant byte first
+              
+    * listen (server only) - \<sys/socket.h\>
+    
+      * TCP server will listen to a socket and wait for an incoming connection
       
+      * listen ( socket descriptor , queue length )
+      
+        * socket descriptor: return value of socket
+        
+        * queue (doesn't work anymore) : number of connections that can wait
+        
+    * accept (server only) - \<sys/socket.h\>
+    
+      * Set up a tcp connection
+      
+      * Handles the required 3-way handshake
+      
+      * A complete socket has 5 pieces of information, IP address and port # for both the client and 
+      server, and protocol (tcp/udp)
+      
+      * Once a client connection gets past listen(), accept cteayes a new socket
+      with the client information added, and returns a descriptor to the new socket
+      
+      
+              
+              
+            
+
+# 01/10/2017
+#Aim: Socket to Me
+
+  * Look at previous lesson starting at sin_addr
+    
+  * network standard for storing ports: big endian  
+  
+  
+# Code (server)
+```c
+//headers
+
+int sd;
+int connection;
+char buffer[200];
+
+sd = socket( AF_INET, SOCK_STREAM, 0);
+
+struct sockaddr_in sock;
+sock.sin_family = AF_INET;
+sock.sin_port = htons(9001);
+sock.sin_addr.s_addr = INADDR_ANY;
+
+bind (sd, (struct sockaddr *)&sock, sizeof(sock));
+
+listen(sd,1);
+
+return 0;
+
+```
+    
+# Code (client)
+```
+int sd;
+int connection;
+char buffer[200];
+char *host = "127.0.0.1";
+
+sd = socket( AF_INET, SOCK_STREAM, 0);
+
+struct sockaddr_in sock;
+sock.sin_family = AF_INET;
+sock.sin_port = htons(9001);
+sock.sin_addr.s_addr = INADDR_ANY;
+
+inet_aton(host,&(sock.sin_addr));
+
+ bind (sd, (struct sockaddr *)&sock, sizeof(sock));
+ 
+```
