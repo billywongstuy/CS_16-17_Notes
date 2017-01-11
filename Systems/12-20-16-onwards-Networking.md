@@ -282,16 +282,35 @@
     
       * Set up a tcp connection
       
+      * accept (socket descriptor, socket address, address length)
+      
+        * socket descriptor: return value of socket
+        
+        * address: pointer to a struct sockaddr; will contain the correct address information after connection is made
+        
+        * length: pointer to a variable with size of the address, set after connection is made
+      
+      * returns the socket descriptor of the new socket
+      
       * Handles the required 3-way handshake
       
       * A complete socket has 5 pieces of information, IP address and port # for both the client and 
       server, and protocol (tcp/udp)
       
-      * Once a client connection gets past listen(), accept cteayes a new socket
+      * Once a client connection gets past listen(), accept creates a new socket
       with the client information added, and returns a descriptor to the new socket
       
+    * connect (client only) - \<sys/socket.h\> \<sys/types.h\>
+    
+      * Connect to another program over a socket.
       
-              
+      * Handles the client end of the 3 way handshake
+      
+      * connect (socket descriptor, address, address size)
+      
+        * address struct is the same as in bind
+        
+        
               
             
 
@@ -301,7 +320,12 @@
   * Look at previous lesson starting at sin_addr
     
   * network standard for storing ports: big endian  
-  
+
+# 01/11/2017
+#Aim: Get more power from your sockets
+
+ * Notes above starting after accept
+
   
 # Code (server)
 ```c
@@ -322,12 +346,22 @@ bind (sd, (struct sockaddr *)&sock, sizeof(sock));
 
 listen(sd,1);
 
+struct sockaddr_in sock1;
+unsigned int socklen = sizeof(sock1);
+connection = accept(sd,(struct sockaddr *)&sock1,&socklen);
+
+read(connection,buffer,sizeof(buffer));
+
+printf("server got: <%s>\n",buffer);
+
 return 0;
 
 ```
     
 # Code (client)
 ```
+//headers
+
 int sd;
 int connection;
 char buffer[200];
@@ -342,6 +376,12 @@ sock.sin_addr.s_addr = INADDR_ANY;
 
 inet_aton(host,&(sock.sin_addr));
 
- bind (sd, (struct sockaddr *)&sock, sizeof(sock));
+bind (sd, (struct sockaddr *)&sock, sizeof(sock));
  
+connect (sd, (struct sockaddr *)&sock, sizeof(sock));
+
+write(sd,"hello,6);
+
+return 0;
+
 ```
