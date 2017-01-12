@@ -1,0 +1,50 @@
+AJAX
+Asynchronous javascript and xml
+
+html
+javascript
+xml
+__
+
+AJAX calls can send data to a server using GET or POST (eg)
+and the catch the data sent by tgher server in response
+
+
+AJAX calls cab ve nade via the XMLHttpRequest js object
+
+eg,
+
+var foo = new XMLHttpRequest();
+
+foo.open("GET","info.txt",true);
+foo.send();
+
+
+
+IMPORT JQUERY SCRIPT
+
+
+$.ajax( <SETTINGS> );
+
+SETTINGS: associative array containing all info required to make given ajax call
+
+keys:
+
+url
+type: method (get/post)
+data: data to be sent
+done: function to be called if server responds
+
+
+$.ajax( {
+  url: '\foo';
+  type: 'GET';
+  data: 'information';
+  done: function (d) {console.log(d); }
+}
+);
+
+
+
+
+
