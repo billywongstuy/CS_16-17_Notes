@@ -1,6 +1,6 @@
-#Aim: Input? fgets about it!
+# Aim: Input? fgets about it!
 
-##getcwd - \<unistd.h\>
+## getcwd - \<unistd.h\>
 
   Get the current working directory (cwd) of a program
   
@@ -12,7 +12,7 @@
     
     
     
-##chdir - \<unistd.h\>
+## chdir - \<unistd.h\>
 
   Change the working directory of a program
   
@@ -24,7 +24,7 @@
   
   
 
-##Command Line Arguments:
+## Command Line Arguments:
 
   int main (int argc, char *argv[])
   
@@ -36,7 +36,7 @@
  
  
  
-##scanf - \<stdio.h\>
+## scanf - \<stdio.h\>
 
   scanf( \<FORMATSTRING\>, \<VAR1\>, \<VAR2\> ...)
   
