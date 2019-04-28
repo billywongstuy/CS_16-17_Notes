@@ -1,4 +1,4 @@
-#Aim: How do we flag down a resource?
+# Aim: How do we flag down a resource?
 
   * Semaphores (created by Edsger Dijkstra)
 
@@ -47,7 +47,7 @@
           * Bitwise or IPC_CREAT, IPC_EXCL
    
    
-* #Aim: What\'s a semaphore? - To control resources
+# Aim: What\'s a semaphore? - To control resources
 
   * Semaphore code
   
@@ -115,7 +115,7 @@
         
       * AMOUNT: the amount of semaphores you want to operate on in a semaphore set.
 
-#Code
+# Code
 
 ```c
 union semun {
